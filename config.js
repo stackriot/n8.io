@@ -8,7 +8,7 @@
 
 var path = require('path')
 
-exports.production = {
+var config = {
   // The url to use when providing links to the site, E.g. in RSS and email.
   // Change this to your Ghost blog's published URL.
   url: 'https://now-examples-ghost.now.sh',
@@ -18,10 +18,27 @@ exports.production = {
 
   // #### Database
   // Ghost supports sqlite3 (default), MySQL & PostgreSQL
-  // For deployment to Now, a remote/persistent storage should be used
-  // (i.e mysql or postgres), so that your content is persisted throughout
-  // multiple deployments / instances / upgrades.
-  // http://www.fastcomet.com/tutorials/ghost/configure-mysql-database
+  //
+  // You basically have two workflows to choose from for the database
+  // when deploying to Now:
+  //
+  //   1) Use "sqlite3" backend. Run Ghost in development mode on localhost and
+  //      write blog posts + upload images via the Ghost UI. When ready to create
+  //      a deployment, simply type `now` and the latest state will be uploaded.
+  //      Note that in this workflow, the deployments are read-only and cannot
+  //      have new blog posts or files uploaded. Restart this flow for additional
+  //      changes. This is the default, because it's inline with the general
+  //      develop + deploy paradigm that Now encourages.
+  //
+  //   2) Use "mysql" or "postgres" backends configured to a remote database
+  //      server. In this workflow, blog posts can be created via the Ghost UI
+  //      without creating a new Now deployment, however image uploading is
+  //      disabled because Now deployments are read-only, so you'll have to use an
+  //      external image hosting service for images in your blog posts in this
+  //      case. With this flow, the only time you need to create new Now
+  //      deployments is when a new version of Ghost comes out that you would
+  //      like to upgrade to.
+  //
   database: {
     client: 'sqlite3',
     connection: {
@@ -30,7 +47,7 @@ exports.production = {
     debug: false
   },
 
-  // #### Use persistent file storage? (No, for Now deployments)
+  // #### Use persistent file storage?
   // http://support.ghost.org/config/#file-storage
   //
   // Now fires up multiple instances of your Ghost server globally,
@@ -62,3 +79,16 @@ exports.production = {
     contentPath: path.join(__dirname, 'content')
   }
 }
+
+
+exports.production = config
+
+exports.development = Object.create(config)
+
+// Update the `url` so that ghost doesn't try to redirect us
+// to the production URL.
+exports.development.url = 'http://localhost:2368'
+
+// On localhost we're allowed to upload files to the `content`
+// directory via the Ghost blog editor UI.
+exports.development.fileStorage = true
