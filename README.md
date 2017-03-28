@@ -11,6 +11,8 @@ repository and run `now`:
 ```bash
 $ git clone git://github.com/now-examples/ghost
 $ cd ghost
+$ NODE_ENV=development npm start
+# make changes to your Ghost database locally before deploying
 $ now
 ```
 
@@ -19,7 +21,31 @@ $ now
 You can tweak the `config.js` file and `content` directory to your liking, and
 then re-deploy by running `now` again.
 
-**NOTE:** The `config.js` file here is set up to use the "sqlite3" storage
-backend for out-of-the-box one command deployment, however if you want to
-persist the blog data throughout multiple deployments and version upgrades,
-then you should set up "mysql" or "postgres" for your data backend.
+### A note on Ghost database engines with Now
+
+#### `sqlite3`
+
+The file system on Now deployments is immutable. So knowing this, if you're
+going to stick with the default `sqlite3` backend (which is file system
+based) then you should follow the typical Now-deployment paradigm. That is:
+
+ * Start Ghost up locally in development mode: `NODE_ENV=development npm start`
+ * Write a blog post and publish it so that the local sqlite database is updated
+ * Create a new Now deployment and re-alias your URL
+
+This paradigm requires a new deployment for _any_ new blog posts or changes,
+and when upgrading Ghost.
+
+#### `mysql` and `postgres`
+
+If you want to use a `mysql` or `postgres` database service, then you'll have
+to update the `config.js` file to point to an externally hosted database.
+If you go this route then your Now deployment is more "live" such that you can
+edit and publish posts without creating a new Now deployment, so the workflow
+looks more like:
+
+ * Edit the `config.js` file to point to your database server
+ * Create a Now deployment and re-alias your URL
+ * At this point you can go to the admin panel on your Now deploment URL and make desired changes
+
+This paradigm requires a new deployment only when upgrading Ghost, or tweaking database settings.
