@@ -11,6 +11,7 @@ repository and run `now`:
 ```bash
 $ git clone git://github.com/now-examples/ghost
 $ cd ghost
+$ npm install
 $ NODE_ENV=development npm start
 # make changes to your Ghost database locally before deploying
 $ now
