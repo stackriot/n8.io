@@ -6,15 +6,32 @@
 
 // Full documentation can be found at http://support.ghost.org/config/
 
-var path = require('path')
+const path = require('path')
 
-var config = {
+const mailgunAuth = {
+  user: process.env.MAILGUN_USERNAME,
+  pass: process.env.MAILGUN_PASSWORD
+}
+if (!mailgun.user) {
+  throw new TypeError('the MAILGUN_USERNAME env variable must be set!')
+}
+if (!mailgun.pass) {
+  throw new TypeError('the MAILGUN_PASSWORD env variable must be set!')
+}
+
+const config = {
   // The url to use when providing links to the site, E.g. in RSS and email.
   // Change this to your Ghost blog's published URL.
   url: 'https://n8.io',
 
   // Visit http://support.ghost.org/mail for instructions
-  mail: {},
+  mail: {
+    transport: 'SMTP',
+    options: {
+      service: 'Mailgun',
+      auth: mailgunAuth
+    }
+  },
 
   // #### Database
   // Ghost supports sqlite3 (default), MySQL & PostgreSQL
