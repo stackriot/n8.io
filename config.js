@@ -12,10 +12,10 @@ const mailgunAuth = {
   user: process.env.MAILGUN_USERNAME,
   pass: process.env.MAILGUN_PASSWORD
 }
-if (!mailgun.user) {
+if (!mailgunAuth.user) {
   throw new TypeError('the MAILGUN_USERNAME env variable must be set!')
 }
-if (!mailgun.pass) {
+if (!mailgunAuth.pass) {
   throw new TypeError('the MAILGUN_PASSWORD env variable must be set!')
 }
 
