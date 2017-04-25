@@ -1,13 +1,13 @@
 {
   "private": true,
-  "name": "now-examples-ghost",
-  "description": "Example deployment of a `ghost` blog to Now using npm",
+  "name": "n8.io",
+  "description": "@TooTallNate's personal blog - powered by Ghost, running on Now",
   "scripts": {
     "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/now-examples/ghost.git"
+    "url": "git://github.com/TooTallNate/n8.io.git"
   },
   "keywords": [
     "now",
@@ -19,17 +19,17 @@
   "author": "Nathan Rajlich <nate@zeit.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/now-examples/ghost/issues"
+    "url": "https://github.com/TooTallNate/n8.io/issues"
   },
-  "homepage": "https://github.com/now-examples/ghost#readme",
+  "homepage": "https://github.com/TooTallNate/n8.io#readme",
   "engines": {
     "node": "6"
   },
   "dependencies": {
-    "ghost": "0.11.7"
+    "ghost": "0.11.8"
   },
   "now": {
-    "alias": "now-examples-ghost.now.sh",
+    "alias": "n8.io",
     "env": {
       "NODE_ENV": "production"
     }
