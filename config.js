@@ -11,7 +11,7 @@ var path = require('path')
 var config = {
   // The url to use when providing links to the site, E.g. in RSS and email.
   // Change this to your Ghost blog's published URL.
-  url: 'https://now-examples-ghost.now.sh',
+  url: 'https://n8.io',
 
   // Visit http://support.ghost.org/mail for instructions
   mail: {},
