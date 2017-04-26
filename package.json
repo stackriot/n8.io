@@ -31,7 +31,9 @@
   "now": {
     "alias": "n8.io",
     "env": {
-      "NODE_ENV": "production"
+      "NODE_ENV": "production",
+      "MAILGUN_USERNAME": "@n8-io-mailgun-username",
+      "MAILGUN_PASSWORD": "@n8-io-mailgun-password"
     }
   }
 }
